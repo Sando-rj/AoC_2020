@@ -54,33 +54,18 @@ for c in range(cycle_num - 1):
     z = 0
     w = 0
     comparison_hyperspace = copy.deepcopy(work_hyperspace)
-#    display_cube(comparison_hyperspace)
-#    display_cube(work_hyperspace)
-#    print('>'*30)
     for w in range(1, len(comparison_hyperspace) - 1):
         for z in range(1, len(comparison_hyperspace[0]) - 1):
             for y in range(1, len(comparison_hyperspace[0][0]) - 1):
-#               print(work_hyperspace[w][z][y])
                 newline = comparison_hyperspace[w][z][y]
                 for x in range(1, len(comparison_hyperspace[0][0][0]) - 1):
                     neighbourhood = sum([ 1 if comparison_hyperspace[w+n[0]][z+n[1]][y+n[2]][x+n[3]] == '#' else 0 for n in neighbours_pos])
                     if(comparison_hyperspace[w][z][y][x] == '#' and not(neighbourhood == 2 or neighbourhood == 3)):
-#                       print("# -> .")
-#                       print("Before change : " + work_hyperspace[w][z][y])
                         newline = newline[:x] + '.' + newline[x+1:]
-#                       print("After  change : " + work_hyperspace[w][z][y])
 	
                     if(comparison_hyperspace[w][z][y][x] == '.' and neighbourhood == 3):
-#                       print(". -> #")
-#                       print("Before change : " + work_hyperspace[w][z][y])
                         newline = newline[:x] + '#' + newline[x+1:]
-#                       print("After  change : " + work_hyperspace[w][z][y])
 	
-#                    print(" x : " + str(x) + " y : " + str(y) + " z : " + str(z) + " w : " + str(w) + " sum : " + str(neighbourhood) + " " + comparison_hyperspace[w][z][y][x] + " -> " + work_hyperspace[w][z][y][x])
                 work_hyperspace[w][z][y] = newline
-#               print(work_hyperspace[w][z][y])
-#    print('#' * 20 + " " + str(c+1) + " " + '#' * 20)
-#    display_cube(work_hyperspace)    
-#    print('<'*30)
 
 print(count_activated(work_hyperspace))
